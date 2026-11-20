@@ -1,0 +1,105 @@
+# SAFYDO — runtime configuration
+hostname: safydo
+mdns_name: safydo.local
+
+audio:
+  sink: auto          # auto-detect BT A2DP sink; override with ALSA device name
+  mpv_socket: /run/audio-player/mpv.sock
+  viz_fifo: /run/audio-player/viz.pcm
+  volume: 80
+  volume_follow_hardware: false   # sync slider with BT speaker HW volume buttons
+  speaker_volume_mac: ""   # set by the player: the speaker that has taken over the volume
+  eq_enabled: false
+  resume_on_boot: true   # replay last stream/USB track after reboot
+  rewind_minutes: 10   # live-stream rewind window held in RAM (mpv back buffer, capped at 96 MB)
+  output_buffer: 0.5   # s of ALSA/bluealsa output buffer (0.2-2); below 0.5 bluealsa underruns
+
+# Optional panels (Settings -> General -> Modules). Neither runs anything while
+# idle; links: false also stops the weekly yt-dlp upgrade timer.
+modules:
+  links: true
+  files: true
+  recordings: true
+
+# Optional web login (Settings -> System; scripts/web_auth.sh). nginx asks for
+# a username and password before the UI, API or status stream. The password is
+# kept only as a SHA-512 hash in /etc/nginx/safydo-auth.htpasswd; turning it on
+# without one sets "safydo". Locked out? sudo scripts/web_auth.sh disable
+auth:
+  enabled: false
+  username: safydo
+  default_password: false
+
+# Recording (Settings -> Recording; backend/services/recorder.py).
+recording:
+  format: mp3          # mp3 | opus | flac | original (as broadcast, no re-encode, .mka)
+  mp3_bitrate: 192     # 128 160 192 256 320
+  opus_bitrate: 128    # 64 96 128 160 192 256
+  flac_level: 5        # 0 (fast) .. 8 (smallest)
+  location: auto       # auto = USB drive if mounted, else SD | usb | sd
+  max_minutes: 240     # stop by itself after this; 0 = no limit
+
+# Online-stream tuning (Settings -> Streams; backend/services/stream_settings.py).
+stream:
+  retries: 0               # reconnect attempts, 0 = unlimited (ffmpeg 7+; ignored on Bookworm's 5.1)
+  reconnect_delay_max: 10  # s, longest back-off between reconnects
+  cache_secs: 60           # s of read-ahead; caps RAM on long web links (mpv default is unlimited)
+  rebuffer_secs: 1.0       # s to refill after a stall before playing again
+  prebuffer_on_start: false  # also wait rebuffer_secs before the first sound
+  timeout_secs: 30         # connect/read timeout
+  user_agent: ""           # empty = mpv's default
+
+bluetooth:
+  auto_reconnect: true
+  autoconnect_strategy: strongest   # strongest (RSSI-ranked known devices) | primary (only primary_mac)
+  codec_prime_on_connect: true   # brief A2DP stream on connect → negotiate best codec
+  primary_mac: ""   # set automatically when you pair a speaker from the web UI
+  # The controller can stop answering the host mid-stream (kernel logs
+  # 'command tx timeout') while BlueZ and bluealsa still report everything
+  # healthy. audio-player-bt-watchdog.timer spots that and rebinds the driver,
+  # which recovers it in ~16s on boards whose BT_ON is a real SoC GPIO.
+  # Where it is not (Pi 3 A+: the line is on the VideoCore expander), the rebind
+  # cannot power-cycle the chip and a reboot is the only recovery. This says
+  # whether the box may take that reboot on its own judgement, capped at 3 per
+  # 24h. Off by default everywhere — rebooting a machine that is playing music
+  # is the owner's call. The switch is in the web UI: Settings → Bluetooth.
+  wedge_reboot: false
+
+leds:
+  enabled: false     # Blinkt! 8x APA102 LEDs as a physical stereo VU meter (GPIO 23/24)
+  brightness: 0.5    # 0.01 - 1.0
+  # A strip can't be detected, so this says whether one is there. auto: yes on the
+  # Zero 2W, no on the Pi 3 A+, where GPIO 23 may be the DABBoard's reset line.
+  fitted: auto
+
+radio:
+  enabled: false     # DABBoard FM tuner. Shares GPIO 23 with the Blinkt, so never both
+  resume_on_boot: false   # start the tuner by itself after a boot (see docs/radio.md)
+  last_frequency_khz: 0
+  rds_region: E      # E = RDS (Europe), U = RBDS (North America)
+
+sources:             # discover-more-stations plugins (disabled by default)
+  radiobrowser:
+    enabled: false   # radio-browser.info — free internet-radio directory, no key
+  jamendo:
+    enabled: false   # Jamendo CC music — needs a free client_id (developer.jamendo.com)
+    client_id: ""
+
+paths:
+  owner: ""          # account owning USB/network mounts; install.sh fills this in
+  install_dir: /opt/rpi-audio-player
+  config_dir: /opt/rpi-audio-player/config
+  usb_mount: /media/usb
+  state_dir: /var/lib/audio-player
+
+network:
+  ethernet_priority: false   # enable only with working USB Ethernet (see network_priority.sh)
+  # ON by default: on a fresh box with no known network this AP is the only way
+  # in without a serial cable. It only ever appears when there is no uplink AND
+  # a wireless adapter exists, after several consecutive checks, and it stands
+  # down by itself once a real uplink returns.
+  captive_portal_enabled: true
+
+performance:
+  target_ram_mb: 200
+  tmpfs_logs: true

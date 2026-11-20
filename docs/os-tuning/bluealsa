@@ -1,0 +1,11 @@
+# /etc/default/bluealsa — intentionally has no settings.
+#
+# The Debian bluealsa.service never reads this file, so daemon options set
+# here are silently ignored. The real options live in the systemd drop-in
+# written by scripts/build_bluealsa.sh (single source of truth):
+#   /etc/systemd/system/bluealsa.service.d/10-hd-codecs.conf
+#
+# With the source-built bluez-alsa the a2dp-source codecs are:
+# SBC (XQ), AAC, aptX, aptX-HD, LDAC. The codec is auto-selected after
+# connect by scripts/bt_codec_select.sh (LDAC > aptX-HD > aptX > AAC > SBC)
+# and can be switched from the web UI.

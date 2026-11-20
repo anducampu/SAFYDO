@@ -1,0 +1,21 @@
+{
+  "presets": {
+    "flat": {
+      "name": "Flat",
+      "bands": [0, 0, 0, 0, 0]
+    },
+    "speaker": {
+      "name": "Speaker",
+      "bands": [3, 2, 0, -1, 2]
+    },
+    "headphone": {
+      "name": "Headphone",
+      "bands": [-2, 0, 1, 2, 1]
+    },
+    "custom": {
+      "name": "Custom",
+      "bands": [0, 0, 0, 0, 0]
+    }
+  },
+  "active_preset": "flat"
+}

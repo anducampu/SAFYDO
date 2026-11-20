@@ -1,0 +1,5 @@
+# --- RPI Audio Player (Phase 0) — safe defaults, appended by install.sh ---
+# No overclock / no USB OTG here — those apply only after reboot and can break WiFi.
+gpu_mem=16
+disable_splash=1
+boot_delay=0

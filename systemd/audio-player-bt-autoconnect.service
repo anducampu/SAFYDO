@@ -1,0 +1,13 @@
+[Unit]
+Description=Auto-connect primary Bluetooth audio device
+After=bluetooth.service bluealsa.service
+Wants=bluetooth.service bluealsa.service
+ConditionPathExists=/opt/rpi-audio-player/config/player.yaml
+
+[Service]
+Type=oneshot
+ExecStart=/opt/rpi-audio-player/scripts/bt_autoconnect.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

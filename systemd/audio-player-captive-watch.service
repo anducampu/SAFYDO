@@ -1,0 +1,9 @@
+[Unit]
+Description=Raise the SAFYDO setup AP when there is no uplink
+After=NetworkManager.service network-online.target
+ConditionPathExists=/opt/rpi-audio-player/scripts/captive_watch.sh
+
+[Service]
+Type=oneshot
+ExecStart=/opt/rpi-audio-player/scripts/captive_watch.sh
+TimeoutStartSec=120

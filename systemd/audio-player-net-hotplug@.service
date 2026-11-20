@@ -1,0 +1,11 @@
+[Unit]
+Description=SAFYDO USB network adapter hotplug handler (%i)
+# udev must not run long work itself, so it starts this instead.
+After=NetworkManager.service
+ConditionPathExists=/opt/rpi-audio-player/scripts/net_hotplug.sh
+
+[Service]
+Type=oneshot
+# %i is "<action>-<iface>" so one template covers add and remove.
+ExecStart=/bin/sh -c '/opt/rpi-audio-player/scripts/net_hotplug.sh "$(echo %i | cut -d- -f1)" "$(echo %i | cut -d- -f2-)"'
+TimeoutStartSec=60

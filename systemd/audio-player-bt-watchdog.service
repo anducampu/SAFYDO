@@ -1,0 +1,8 @@
+[Unit]
+Description=Recover a Bluetooth controller that has stopped answering
+After=bluetooth.service
+ConditionPathExists=/opt/rpi-audio-player/config/player.yaml
+
+[Service]
+Type=oneshot
+ExecStart=/opt/rpi-audio-player/scripts/bt_watchdog.sh

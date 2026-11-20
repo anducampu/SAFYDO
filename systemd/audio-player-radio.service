@@ -1,0 +1,15 @@
+[Unit]
+Description=Put the DABBoard tuner into reset on every clean stop or reboot
+ConditionPathExists=/usr/local/lib/ugreen-dab+/radio_cli
+# Before, so at shutdown this stops AFTER the backend: nothing is left to restart
+# the chip once it has gone into reset.
+Before=audio-player-backend.service
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/true
+ExecStop=-/usr/local/lib/ugreen-dab+/radio_cli -k
+
+[Install]
+WantedBy=multi-user.target

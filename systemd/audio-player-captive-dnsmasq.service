@@ -1,0 +1,20 @@
+[Unit]
+Description=Safydo captive portal dnsmasq
+After=audio-player-captive-hostapd.service
+Requires=audio-player-captive-hostapd.service
+# A portal with no DHCP is worse than no portal: clients see the SSID, join,
+# and silently fail. Give up after a few tries so the failure is visible in
+# `systemctl --failed` rather than buried in a hundred restarts.
+StartLimitIntervalSec=60
+StartLimitBurst=4
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/dnsmasq --keep-in-foreground --conf-file=/run/audio-player/captive/dnsmasq.conf
+Restart=on-failure
+RestartSec=2
+# Surface the bind error rather than swallowing it.
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

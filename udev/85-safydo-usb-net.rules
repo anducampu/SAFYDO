@@ -1,0 +1,17 @@
+# Swapping the uplink dongle (ethernet <-> WiFi) is routine on these boxes: the
+# onboard radio is disabled so BT owns 2.4 GHz, which makes the dongle the only
+# uplink. Hand each add/remove to a systemd unit — udev RUN must stay short, and
+# nmcli here would block the event.
+#
+# Match every net device, not just USB ones, and let net_hotplug.sh decide from
+# sysfs — it already tests /sys/class/net/<if>/wireless rather than trusting the
+# name or the bus. The old DEVPATH=="*/usb*" filter meant an onboard radio (SDIO
+# on the 3 A+) never produced an add event, so nothing ever switched the WiFi
+# radio back on for it. lo and the USB gadget are still excluded by KERNEL.
+ACTION=="add", SUBSYSTEM=="net", KERNEL!="lo", KERNEL!="usb*", \
+  TAG+="systemd", ENV{SYSTEMD_WANTS}+="audio-player-net-hotplug@add-$name.service"
+
+# On remove the sysfs node is already gone, so the handler decides from what is
+# left rather than from the departing interface.
+ACTION=="remove", SUBSYSTEM=="net", KERNEL!="lo", KERNEL!="usb*", \
+  RUN+="/bin/systemctl --no-block start audio-player-net-hotplug@remove-$name.service"

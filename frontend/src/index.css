@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --accent: #6c5ce7;
+  --accent-glow: rgba(108, 92, 231, 0.35);
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: #08080c;
+}
+
+/* Theme-matched, wider scrollbars — friendlier to grab on touch and desktop. */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: color-mix(in srgb, var(--accent) 55%, transparent) transparent;
+}
+::-webkit-scrollbar {
+  width: 14px;
+  height: 14px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: color-mix(in srgb, var(--accent) 75%, transparent);
+  background-clip: padding-box;
+}
+
+@layer utilities {
+  .glass {
+    @apply border border-white/5 bg-surface/80 backdrop-blur-md;
+  }
+  .accent-ring {
+    box-shadow: 0 0 0 1px var(--accent-glow), 0 0 32px var(--accent-glow);
+  }
+}
+
+/* Infinite marquee for overflowing Now Playing text (two copies, shift -50%). */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+/* Collapsed panels (CollapseToggle): keep only the header row. Hidden with CSS
+   rather than unmounted so panel state and the Stations count survive. */
+section[data-collapsed="true"] > :not(:first-child) {
+  display: none;
+}
+section[data-collapsed="true"] > :first-child {
+  margin-bottom: 0;
+}

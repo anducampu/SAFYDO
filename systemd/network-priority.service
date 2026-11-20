@@ -1,0 +1,11 @@
+[Unit]
+Description=Prefer USB/Ethernet over WiFi when carrier is up
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/opt/rpi-audio-player/scripts/network_priority.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

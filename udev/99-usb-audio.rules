@@ -1,0 +1,6 @@
+# USB music auto-mount + rescan — Phase 6
+ACTION=="add", SUBSYSTEM=="block", ENV{DEVTYPE}=="partition", ENV{ID_BUS}=="usb", \
+    RUN+="/opt/rpi-audio-player/scripts/usb_automount.sh add %E{DEVNAME}"
+
+ACTION=="remove", SUBSYSTEM=="block", ENV{DEVTYPE}=="partition", ENV{ID_BUS}=="usb", \
+    RUN+="/opt/rpi-audio-player/scripts/usb_automount.sh remove %E{DEVNAME}"

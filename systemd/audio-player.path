@@ -1,0 +1,14 @@
+[Unit]
+Description=Watch USB mount for audio rescan (Phase 6)
+After=local-fs.target
+
+[Path]
+# No PathExists here: the directory always exists (install.sh creates it),
+# so PathExists retriggers the rescan in a loop at boot until the start
+# limit fails both units. usb_automount.sh does the real rescan on mount;
+# PathChanged is only a backup for manual mounts.
+PathChanged=/media/usb
+Unit=audio-player-usb-rescan.service
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,16 @@
+[Unit]
+Description=SAFYDO USB composite gadget (serial console + ethernet dev link)
+# Wants= (not just After=) so configfs is actually pulled in — up() dies if
+# /sys/kernel/config isn't mounted, and After= alone only orders, never starts it.
+Wants=sys-kernel-config.mount
+After=sys-kernel-config.mount
+ConditionPathExists=/opt/rpi-audio-player/scripts/usb_gadget.sh
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/opt/rpi-audio-player/scripts/usb_gadget.sh up
+ExecStop=/opt/rpi-audio-player/scripts/usb_gadget.sh down
+
+[Install]
+WantedBy=multi-user.target

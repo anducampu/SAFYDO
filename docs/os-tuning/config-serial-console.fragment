@@ -1,0 +1,5 @@
+# Last-resort GPIO serial console on pins 8/10 (needs a USB-TTL adapter).
+# Mini-UART only — Bluetooth stays on the PL011 UART, unaffected.
+# Boards with the USB gadget dev link get this from config-usb-gadget.fragment
+# instead; this fragment is for boards without a gadget-capable port (3 A+).
+enable_uart=1

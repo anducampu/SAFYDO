@@ -1,0 +1,22 @@
+[Unit]
+Description=Rename this SAFYDO box if another already holds its .local name
+# Needs a live IP and a working resolver: avahi must be up to answer, and the
+# network must be up for it to have anyone to ask.
+After=network-online.target avahi-daemon.service NetworkManager-wait-online.service
+Wants=network-online.target avahi-daemon.service
+# Deliberately NOT Before=audio-player-backend.service: the probe can take a
+# few seconds and a rename is never worth holding the UI back for. The backend
+# reads the name per request, so it picks up a change without being ordered.
+ConditionPathExists=/opt/rpi-audio-player/scripts/hostname_conflict.sh
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+# Generous, because it no longer blocks anything: the unit failing on a
+# timeout would break the project's 0-failed-units invariant for nothing.
+TimeoutStartSec=180
+ExecStart=/opt/rpi-audio-player/scripts/hostname_conflict.sh apply
+SuccessExitStatus=0 1
+
+[Install]
+WantedBy=multi-user.target

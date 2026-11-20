@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Safydo WiFi Setup</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100dvh; font-family: system-ui, sans-serif;
+      background: #08080c; color: #f0eef5; display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+    .card {
+      width: 100%; max-width: 400px; background: #12121a; border: 1px solid #ffffff14;
+      border-radius: 1rem; padding: 1.5rem;
+    }
+    h1 { font-size: 1.25rem; margin: 0 0 0.25rem; }
+    p { color: #8b8798; font-size: 0.875rem; margin: 0 0 1.25rem; }
+    label { display: block; font-size: 0.75rem; color: #8b8798; margin-bottom: 0.35rem; }
+    input {
+      width: 100%; padding: 0.65rem 0.75rem; margin-bottom: 1rem;
+      border-radius: 0.5rem; border: 1px solid #ffffff14; background: #1c1c28; color: #fff;
+    }
+    button {
+      width: 100%; padding: 0.75rem; border: none; border-radius: 0.5rem;
+      background: #6c5ce7; color: #fff; font-weight: 600; cursor: pointer;
+    }
+    button:disabled { opacity: 0.5; cursor: default; }
+
+    /* Network picker */
+    .head { display: flex; align-items: baseline; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.5rem; }
+    .head label { margin: 0; }
+    .link {
+      width: auto; padding: 0; background: none; color: #6c5ce7;
+      font-size: 0.75rem; font-weight: 500; text-decoration: underline;
+    }
+    .list {
+      list-style: none; margin: 0 0 1rem; padding: 0;
+      border: 1px solid #ffffff14; border-radius: 0.5rem; overflow: hidden;
+      max-height: 15rem; overflow-y: auto;
+    }
+    .list li + li { border-top: 1px solid #ffffff0d; }
+    .net {
+      width: 100%; display: flex; align-items: center; gap: 0.6rem; text-align: left;
+      padding: 0.7rem 0.75rem; background: #1c1c28; color: #f0eef5;
+      font-size: 0.875rem; font-weight: 500; border-radius: 0;
+    }
+    .net:hover { background: #242434; }
+    .net[aria-pressed="true"] { background: #6c5ce7; color: #fff; }
+    .net .ssid { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .net .lock { font-size: 0.7rem; opacity: 0.65; }
+    .bars { display: flex; align-items: flex-end; gap: 2px; height: 0.85rem; flex: none; }
+    .bars i { width: 3px; background: currentColor; opacity: 0.25; border-radius: 1px; }
+    .bars i.on { opacity: 0.9; }
+    .bars i:nth-child(1) { height: 25%; } .bars i:nth-child(2) { height: 50%; }
+    .bars i:nth-child(3) { height: 75%; } .bars i:nth-child(4) { height: 100%; }
+    .note { font-size: 0.7rem; color: #6d6a7c; margin: -0.75rem 0 1rem; }
+    .msg { margin-top: 1rem; font-size: 0.8rem; min-height: 1.2em; }
+    .ok { color: #4ecdc4; } .err { color: #e63946; }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Safydo</h1>
+    <p>Connect Safydo to your WiFi network.</p>
+
+    <div class="head">
+      <label id="picker-label">Nearby networks</label>
+      <button type="button" class="link" id="rescan">Refresh</button>
+    </div>
+    <ul class="list" id="networks" aria-labelledby="picker-label"></ul>
+    <p class="note hidden" id="note"></p>
+
+    <form id="wifi-form">
+      <div id="ssid-manual" class="hidden">
+        <label for="ssid">Network name</label>
+        <input id="ssid" name="ssid" autocomplete="off" />
+      </div>
+      <div id="password-row" class="hidden">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password" autocomplete="off" />
+      </div>
+      <button type="submit" id="submit" disabled>Save and connect</button>
+    </form>
+    <p class="msg" id="msg"></p>
+  </div>
+
+  <script>
+    const listEl = document.getElementById("networks");
+    const noteEl = document.getElementById("note");
+    const msgEl = document.getElementById("msg");
+    const manualRow = document.getElementById("ssid-manual");
+    const passwordRow = document.getElementById("password-row");
+    const ssidInput = document.getElementById("ssid");
+    const passwordInput = document.getElementById("password");
+    const submitBtn = document.getElementById("submit");
+    const rescanBtn = document.getElementById("rescan");
+
+    // null = nothing chosen yet; {manual:true} = the user is typing a name.
+    let selected = null;
+
+    function bars(percent) {
+      const lit = percent >= 75 ? 4 : percent >= 50 ? 3 : percent >= 25 ? 2 : 1;
+      return '<span class="bars">' +
+        [1, 2, 3, 4].map((n) => `<i class="${n <= lit ? "on" : ""}"></i>`).join("") +
+        "</span>";
+    }
+
+    function setSelection(next) {
+      selected = next;
+      const manual = !!(next && next.manual);
+      manualRow.classList.toggle("hidden", !manual);
+      // An open network takes no password, so do not ask for one.
+      const wantsPassword = manual || (next && next.secure);
+      passwordRow.classList.toggle("hidden", !wantsPassword);
+      submitBtn.disabled = !next;
+      for (const btn of listEl.querySelectorAll(".net")) {
+        btn.setAttribute("aria-pressed", String(!manual && !!next && btn.dataset.ssid === next.ssid));
+      }
+      if (manual) ssidInput.focus();
+      else if (wantsPassword) passwordInput.focus();
+    }
+
+    function render(data) {
+      const nets = data.networks || [];
+      listEl.innerHTML = "";
+      for (const net of nets) {
+        const li = document.createElement("li");
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "net";
+        btn.dataset.ssid = net.ssid;
+        btn.setAttribute("aria-pressed", "false");
+        btn.innerHTML =
+          `<span class="ssid"></span>${net.secure ? '<span class="lock">🔒</span>' : ""}${bars(net.signal)}`;
+        btn.querySelector(".ssid").textContent = net.ssid;   // never innerHTML — SSIDs are attacker-chosen
+        btn.addEventListener("click", () => setSelection({ ssid: net.ssid, secure: net.secure }));
+        li.appendChild(btn);
+        listEl.appendChild(li);
+      }
+
+      const li = document.createElement("li");
+      const other = document.createElement("button");
+      other.type = "button";
+      other.className = "net";
+      other.textContent = nets.length ? "Other network…" : "Enter a network name…";
+      other.addEventListener("click", () => setSelection({ manual: true }));
+      li.appendChild(other);
+      listEl.appendChild(li);
+
+      if (!nets.length) {
+        noteEl.textContent = "No networks found. You can still type a name.";
+        noteEl.classList.remove("hidden");
+      } else if (data.cached) {
+        // Be honest: one radio cannot serve this AP and scan at the same time.
+        noteEl.textContent = "Scanned just before the setup network started.";
+        noteEl.classList.remove("hidden");
+      } else {
+        noteEl.classList.add("hidden");
+      }
+    }
+
+    async function loadNetworks() {
+      rescanBtn.disabled = true;
+      rescanBtn.textContent = "Scanning…";
+      try {
+        const res = await fetch("/api/network/wifi/scan");
+        render(await res.json());
+      } catch (err) {
+        render({ networks: [] });
+      } finally {
+        rescanBtn.disabled = false;
+        rescanBtn.textContent = "Refresh";
+        setSelection(null);
+      }
+    }
+
+    document.getElementById("wifi-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!selected) return;
+      const ssid = (selected.manual ? ssidInput.value : selected.ssid).trim();
+      if (!ssid) {
+        msgEl.className = "msg err";
+        msgEl.textContent = "Network name required";
+        return;
+      }
+      msgEl.className = "msg";
+      msgEl.textContent = "Saving…";
+      submitBtn.disabled = true;
+      try {
+        const res = await fetch("/api/network/wifi", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ssid, password: passwordInput.value }),
+        });
+        const data = await res.json().catch(() => ({}));
+        if (!res.ok) throw new Error(data.detail || res.statusText);
+        msgEl.className = "msg ok";
+        // The AP is about to go away — say so, or the page looks like it hung.
+        msgEl.textContent = `Saved. Safydo is joining ${ssid}; this setup network will disappear.`;
+      } catch (err) {
+        msgEl.className = "msg err";
+        msgEl.textContent = err.message || "Failed to save network";
+        submitBtn.disabled = false;
+      }
+    });
+
+    rescanBtn.addEventListener("click", loadNetworks);
+    loadNetworks();
+  </script>
+</body>
+</html>

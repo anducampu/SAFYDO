@@ -1,0 +1,17 @@
+[Unit]
+Description=Periodic no-uplink check for the SAFYDO setup AP
+
+[Timer]
+# 120 s after boot so a slow DHCP lease is never mistaken for "no network",
+# then every 30 s. With GRACE_TICKS=3 that puts the AP up about 90 s after the
+# uplink really goes away — long enough that a cable jiggle or a lease renewal
+# cannot trigger it, short enough that someone holding a phone does not assume
+# it is broken and give up. The first real test was abandoned at 2 min 41 s,
+# ten seconds short of the old threshold.
+OnBootSec=120
+OnUnitActiveSec=30
+AccuracySec=10s
+Unit=audio-player-captive-watch.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,2 @@
+# Optional — enable with APPLY_OVERCLOCK=1 on install (test stability first)
+arm_freq=1350

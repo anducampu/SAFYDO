@@ -1,0 +1,23 @@
+[Unit]
+Description=SAFYDO USB gadget DHCP (tethered PC gets 10.55.0.x, no gateway/DNS pushed)
+After=usb-gadget.service
+Wants=usb-gadget.service
+# Cap restarts: a config/parse error must not loop forever (RestartSec=3 would
+# otherwise keep dodging the default 10s burst window). 5 failures / 60s -> stop.
+StartLimitIntervalSec=60
+StartLimitBurst=5
+
+[Service]
+# bind-dynamic: attaches to usb0 whenever it appears; port=0 disables DNS.
+# Empty router (opt 3) / dns-server (opt 6) = never hijack the PC's default route
+# (numeric form is accepted by every dnsmasq build; the named form isn't always).
+ExecStart=/usr/sbin/dnsmasq --keep-in-foreground --conf-file=/dev/null \
+    --port=0 --interface=usb0 --bind-dynamic --except-interface=lo \
+    --dhcp-range=10.55.0.10,10.55.0.50,255.255.255.0,12h \
+    --dhcp-option=3 --dhcp-option=6 \
+    --dhcp-leasefile=/run/usb-gadget-dnsmasq.leases
+Restart=on-failure
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

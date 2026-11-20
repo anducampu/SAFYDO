@@ -1,0 +1,38 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# Node / frontend build
+frontend/node_modules/
+# frontend/dist IS tracked on purpose: the Pi has no Node toolchain and a
+# 512 MB board cannot run a vite build, so a clone must ship a ready UI.
+
+# Editor / OS
+.DS_Store
+*.swp
+*~
+.idea/
+.vscode/
+
+# Runtime / local overrides
+*.local
+.env
+.env.*
+safydo-diag-*.txt
+stations_*.json
+
+# Generated public mirror (see scripts/make_public.sh)
+/public/
+stations.json
+
+# DABBoard vendor bundle: its licence forbids redistribution
+radio_cli*
+ugreen-dab*/
+*.dtbo
+
+# Unredacted originals — never publish
+/.private/
+/.image-review

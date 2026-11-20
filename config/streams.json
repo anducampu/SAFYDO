@@ -1,0 +1,540 @@
+{
+  "streams": [
+    {
+      "id": "amsterdam-funk-channel",
+      "name": "AMSTERDAM FUNK CHANNEL",
+      "url": "https://live.afc.fm/",
+      "genre": "CHILL",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "riviera-radio-monte-carlo",
+      "name": "RIVIERA RADIO Monte Carlo",
+      "url": "https://media-ssl.musicradio.com/RivieraRadio",
+      "genre": "AC",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "nyc-house-radio",
+      "name": "NYC HOUSE RADIO",
+      "url": "https://www.ophanim.net:8444/s/8400",
+      "genre": "HOUSE",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "ibiza-global-classics",
+      "name": "IBIZA GLOBAL CLASSICS",
+      "url": "https://control.streaming-pro.com:8000/ibizaglobalclassics.mp3",
+      "genre": "HOUSE",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "ibiza-global-radio",
+      "name": "IBIZA GLOBAL RADIO",
+      "url": "https://cdn-peer031.streaming-pro.com:8025/ibizaglobalradio.mp3",
+      "genre": "HOUSE",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "frisky",
+      "name": "FRISKY",
+      "url": "https://stream.frisky.friskyradio.com/mp3_low",
+      "genre": "HOUSE",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "frisky-deep",
+      "name": "FRISKY DEEP",
+      "url": "https://stream.deep.friskyradio.com/mp3_low",
+      "genre": "HOUSE",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "dance-fm",
+      "name": "DANCE FM",
+      "url": "https://edge126.rcs-rds.ro/profm/dancefm.mp3",
+      "genre": "DANCE",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "bucuresti-fm",
+      "name": "BUCURESTI FM",
+      "url": "https://stream4.srr.ro:8443/bucuresti-fm",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "romania-actualitati",
+      "name": "ROMANIA ACTUALITATI",
+      "url": "https://stream4.srr.ro:8443/romania-actualitati",
+      "genre": "CHR",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "romania-cultural",
+      "name": "ROMANIA CULTURAL",
+      "url": "https://stream4.srr.ro:8443/romania-cultural",
+      "genre": "TALK",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "romania-muzical",
+      "name": "ROMANIA MUZICAL",
+      "url": "https://stream4.srr.ro:8443/romania-muzical",
+      "genre": "CLASSIC",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "radio-zen",
+      "name": "RADIO ZEN",
+      "url": "https://streaming.shoutcast.com/radiozen",
+      "genre": "CHILL",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "rfi-romania",
+      "name": "RFI ROMANIA",
+      "url": "https://asculta.radiorfi.ro/live.mp3",
+      "genre": "TALK",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "radio-guerrilla",
+      "name": "RADIO GUERRILLA",
+      "url": "https://live.guerrillaradio.ro:8443/playlist.aac",
+      "genre": "CHR",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "europa-fm",
+      "name": "EUROPA FM",
+      "url": "https://astreaming.edi.ro:8443/EuropaFM_aac",
+      "genre": "CHR",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "virgin-radio-romania",
+      "name": "VIRGIN RADIO ROMANIA",
+      "url": "https://astreaming.edi.ro:8443/VirginRadio_aac",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "profm",
+      "name": "PROFM",
+      "url": "https://edge126.rcs-rds.ro/profm/profm.mp3",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "digi-fm",
+      "name": "DIGI FM",
+      "url": "https://edge76.rcs-rds.ro/digifm/digifm.mp3",
+      "genre": "CHR",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "impact-fm-suceava",
+      "name": "IMPACT FM Suceava",
+      "url": "https://cloud.radiosonicpanel.ro/8016/stream",
+      "genre": "REGIO",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "radio-impuls",
+      "name": "RADIO IMPULS",
+      "url": "https://live.radio-impuls.ro/stream",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "radio-seven",
+      "name": "RADIO SEVEN",
+      "url": "http://80.86.106.32:8000/radio7.mp3",
+      "genre": "ROCK",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "magic-fm",
+      "name": "MAGIC FM",
+      "url": "https://live.magicfm.ro/magicfm.aacp",
+      "genre": "AC",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "national-fm",
+      "name": "NATIONAL FM",
+      "url": "https://asculta.nationalfm.ro:9102/nfm2",
+      "genre": "AC",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "radio-zu",
+      "name": "RADIO ZU",
+      "url": "http://zuicast.digitalag.ro:9420/zu",
+      "genre": "CHR",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "smart-radio",
+      "name": "SMART RADIO",
+      "url": "https://live.smartradio.ro:8443/live",
+      "genre": "AC",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "frisky-chill",
+      "name": "FRISKY CHILL",
+      "url": "https://stream.chill.friskyradio.com/mp3_low",
+      "genre": "CHILL",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "slam",
+      "name": "SLAM!",
+      "url": "https://27753.live.streamtheworld.com/SLAM_AAC.aac",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "slam-nonstop",
+      "name": "SLAM! Nonstop",
+      "url": "https://25303.live.streamtheworld.com/WEB10_AAC.aac",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "slam-housuh-in-de-pauzuh",
+      "name": "SLAM! Housuh in de Pauzuh",
+      "url": "https://22713.live.streamtheworld.com/WEB16_AAC.aac",
+      "genre": "DANCE",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "slam-mixmarathon",
+      "name": "SLAM! Mixmarathon",
+      "url": "https://25323.live.streamtheworld.com/WEB13_AAC.aac",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "slam-90s",
+      "name": "SLAM! 90s",
+      "url": "https://28983.live.streamtheworld.com/WEB08_AAC.aac",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "slam-00s",
+      "name": "SLAM! 00s",
+      "url": "https://25323.live.streamtheworld.com/WEB15_AAC.aac",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "slam-10s",
+      "name": "SLAM! 10s",
+      "url": "https://22713.live.streamtheworld.com/WEB14_AAC.aac",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "slam-the-boom-room",
+      "name": "SLAM! The Boom Room",
+      "url": "https://22323.live.streamtheworld.com/WEB12_AAC.aac",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "antenne-kaernten",
+      "name": "ANTENNE KAERNTEN",
+      "url": "https://live.antenne.at/ak",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "antenne-kaernten-charts",
+      "name": "ANTENNE KAERNTEN Charts",
+      "url": "https://live.antenne.at/akpluscharts",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "antenne-kaernten-partyhitmix",
+      "name": "ANTENNE KAERNTEN Partyhitmix",
+      "url": "https://live.antenne.at/ost",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "radio-1rock-bg",
+      "name": "RADIO 1ROCK BG",
+      "url": "https://29053.live.streamtheworld.com/RADIO_1_ROCKAAC_L_SC",
+      "genre": "ROCK",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "rock-fm",
+      "name": "ROCK FM",
+      "url": "https://live.rockfm.ro/rockfm.aacp",
+      "genre": "ROCK",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "hit-fm-bg",
+      "name": "HIT FM BG",
+      "url": "https://play.hitfmbg.com/hitfm",
+      "genre": "TOP40",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "radio-prahova",
+      "name": "RADIO PRAHOVA",
+      "url": "https://r2.mediastreaming.ro/listen/rph/radio.mp3",
+      "genre": "REGIO",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "nova-danse",
+      "name": "NOVA DANSE",
+      "url": "https://nova-dance.ice.infomaniak.ch/nova-dance-128.mp3",
+      "genre": "DANCE",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "novazz",
+      "name": "NOVAzz",
+      "url": "https://novazz.ice.infomaniak.ch/novazz-128.mp3",
+      "genre": "JAZZ",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "jazz24",
+      "name": "Jazz24",
+      "url": "https://knkx-live-a.edge.audiocdn.com/6285_128k",
+      "genre": "JAZZ",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "wwoz-new-orleans",
+      "name": "WWOZ New Orleans",
+      "url": "https://wwoz-sc.streamguys1.com/wwoz-hi.mp3",
+      "genre": "JAZZ",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "181-fm-uk-top40",
+      "name": "181.fm UK Top40",
+      "url": "https://ais-edge79-181fm-dal03.cdnstream.com/181-uktop40_128k.mp3",
+      "genre": "JAZZ",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "181-fm-the-vibe-of-vegas",
+      "name": "181.fm The Vibe of Vegas",
+      "url": "https://ais-edge79-181fm-dal03.cdnstream.com/181-vibe_128k.mp3",
+      "genre": "CHR",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "181-fm-smooth-ac",
+      "name": "181.fm Smooth AC",
+      "url": "https://ais-edge79-181fm-dal03.cdnstream.com/181-smoothac_128k.mp3",
+      "genre": "AC",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "181-fm-classical",
+      "name": "181.fm Classical",
+      "url": "https://ais-edge79-181fm-dal03.cdnstream.com/181-classical_128k.mp3",
+      "genre": "CLASSIC",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "nts-island-time",
+      "name": "NTS ISLAND TIME",
+      "url": "https://stream-mixtape-geo.ntslive.net/mixtape21",
+      "genre": "REGGAE",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "nts-4-to-the-floor",
+      "name": "NTS 4 To The Floor",
+      "url": "https://stream-mixtape-geo.ntslive.net/mixtape5",
+      "genre": "HOUSE",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "radio-swiss-classic",
+      "name": "Radio Swiss Classic",
+      "url": "https://livestreaming-node-1.srg-ssr.ch/srgssr/rsc_de/aac/96",
+      "genre": "CLASSIC",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "raadio-2",
+      "name": "Raadio 2",
+      "url": "https://icecast.err.ee/raadio2.opus",
+      "genre": "VA",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "psytrance",
+      "name": "Psytrance",
+      "url": "http://xfer.hirschmilch.de:8000/psytrance.opus",
+      "genre": "PSY",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "dnb-90s-classics",
+      "name": "DnB 90s Classics",
+      "url": "http://srv.tsmod.net:8008/dnb",
+      "genre": "DNB",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "radio-monesterio-es",
+      "name": "Radio Monesterio ES",
+      "url": "http://emisoras.badajoz.es:8040/stream",
+      "genre": "REGIO",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "trendy-radio-mobile-pl",
+      "name": "Trendy Radio Mobile PL",
+      "url": "http://stream.trendyradio.pl:8000/m",
+      "genre": "REGIO",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "hbr1-dream-factory",
+      "name": "HBR1 - Dream Factory",
+      "url": "http://radio.hbr1.com:19800/ambient.ogg",
+      "genre": "CHILL",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "costa-del-mar",
+      "name": "Costa Del Mar",
+      "url": "http://radio4.cdm-radio.com:8020/stream64k-AAC-Chill_autodj",
+      "genre": "CHILL",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "urbana-play-ar",
+      "name": "URBANA PLAY AR",
+      "url": "http://cdn.instream.audio:9660/stream",
+      "genre": "REGIO",
+      "category": "Radio",
+      "favorite": false
+    },
+    {
+      "id": "radio-paradise",
+      "name": "Radio Paradise",
+      "url": "https://stream-uk1.radioparadise.com/aac-320",
+      "genre": "ECLECTIC",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "dance-wave",
+      "name": "Dance Wave!",
+      "url": "https://stream1.dancewave.online:8082/dance.flac.ogg",
+      "genre": "DANCE",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "mangoradio",
+      "name": "MANGORADIO",
+      "url": "https://mangoradio.stream.laut.fm/mangoradio",
+      "genre": "VARIETY",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "classic-vinyl-hd",
+      "name": "Classic Vinyl HD",
+      "url": "https://icecast.walmradio.com:8443/classic",
+      "genre": "EASY LISTENING",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "adroit-jazz-underground",
+      "name": "Adroit Jazz Underground",
+      "url": "https://icecast.walmradio.com:8443/jazz",
+      "genre": "JAZZ",
+      "category": "Radio",
+      "favorite": true
+    },
+    {
+      "id": "hard-rock-radio-fm",
+      "name": "Hard Rock Radio FM",
+      "url": "https://stream-02.surfernetwork.com/lebzfyrqmpcvv",
+      "genre": "ROCK",
+      "category": "Radio",
+      "favorite": true
+    }
+  ]
+}

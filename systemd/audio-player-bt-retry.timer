@@ -1,0 +1,10 @@
+[Unit]
+Description=Periodic Bluetooth auto-connect retry (no-op while connected)
+
+[Timer]
+OnBootSec=90
+OnUnitInactiveSec=45
+AccuracySec=10
+
+[Install]
+WantedBy=timers.target

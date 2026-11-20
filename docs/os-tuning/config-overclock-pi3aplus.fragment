@@ -1,0 +1,11 @@
+# Optional — enable with APPLY_OVERCLOCK=1 on install (test stability first).
+#
+# The 3 A+ already boots at 1400 MHz, so this is a small (+7 %) gain and it is
+# NOT free: the board has no heatspreader and soft-throttles at 60 C, so under a
+# sustained load it can end up slower than stock. Only worth it with a heatsink
+# and a supply that holds 5 V at 2.5 A. Playback itself does not need it —
+# streaming + VU meter sit well under one core.
+#
+# over_voltage sets a permanent bit in the SoC (visible to Raspberry Pi support).
+arm_freq=1500
+over_voltage=2

@@ -1,0 +1,15 @@
+[Unit]
+Description=Periodic check for a wedged Bluetooth controller
+
+[Timer]
+# The kernel names the fault the second the controller stops, so a one-minute
+# cadence catches a wedge inside a minute. AccuracySec matches the other timers
+# so systemd can coalesce the wakeups — this fires forever on a 512 MB board.
+# The script's 100 s lookback already covers interval + accuracy + a slow run
+# (60 + 10 + ~6), so the slack costs no coverage.
+OnBootSec=120
+OnUnitInactiveSec=60
+AccuracySec=10
+
+[Install]
+WantedBy=timers.target

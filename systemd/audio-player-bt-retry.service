@@ -1,0 +1,9 @@
+[Unit]
+Description=Retry auto-connect to known Bluetooth audio devices
+After=bluetooth.service bluealsa.service audio-player-bt-autoconnect.service
+ConditionPathExists=/opt/rpi-audio-player/config/player.yaml
+
+[Service]
+Type=oneshot
+Environment=BT_CONNECT_RETRIES=1
+ExecStart=/opt/rpi-audio-player/scripts/bt_autoconnect.sh --retry

@@ -1,0 +1,4 @@
+# NetworkManager's 85-nm-unmanaged.rules unmanages every DEVTYPE=gadget
+# interface. We want NM to own usb0 — the safydo-usb-gadget profile puts
+# 10.55.0.1/24 on it for the USB dev link (docs/usb-dev-link.md).
+ACTION=="add|change|move", SUBSYSTEM=="net", KERNEL=="usb0", ENV{NM_UNMANAGED}="0"

@@ -1,0 +1,13 @@
+[Unit]
+Description=Ensure WiFi client connection after boot (NetworkManager)
+After=NetworkManager-wait-online.service NetworkManager.service
+Wants=NetworkManager-wait-online.service
+ConditionPathExists=!/run/audio-player/captive/state
+
+[Service]
+Type=oneshot
+ExecStart=/opt/rpi-audio-player/scripts/network_ready.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

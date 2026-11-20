@@ -1,0 +1,15 @@
+[Unit]
+Description=Update yt-dlp (web links: YouTube, SoundCloud, ...)
+Documentation=file:///opt/rpi-audio-player/docs/web-links.md
+After=network-online.target
+Wants=network-online.target
+ConditionPathExists=/usr/local/bin/yt-dlp
+
+[Service]
+Type=oneshot
+# YouTube changes break yt-dlp every few weeks; the fix ships as a release.
+# pip upgrade in the /opt/yt-dlp venv (zipapp fallback: -U); a few MB a week at most.
+ExecStart=/opt/rpi-audio-player/scripts/ytdlp_update.sh
+Nice=10
+IOSchedulingClass=idle
+TimeoutStartSec=300

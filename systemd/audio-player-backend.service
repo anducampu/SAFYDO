@@ -1,0 +1,17 @@
+[Unit]
+Description=RPI Audio Player FastAPI backend
+After=network-online.target sound.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/rpi-audio-player
+Environment=PYTHONUNBUFFERED=1
+ExecStart=/usr/bin/python3 -m uvicorn backend.main:app --host 127.0.0.1 --port 8000
+Restart=on-failure
+RestartSec=3
+StateDirectory=audio-player
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,21 @@
+[Unit]
+Description=mpv JSON IPC player (Bluetooth audio)
+After=audio-player-bt-autoconnect.service bluealsa.service bluetooth.service
+Wants=audio-player-bt-autoconnect.service bluealsa.service
+ConditionPathExists=/opt/rpi-audio-player/scripts/mpv_daemon.sh
+
+[Service]
+Type=simple
+ExecStart=/opt/rpi-audio-player/scripts/mpv_daemon.sh
+Restart=on-failure
+RestartSec=4
+RuntimeDirectory=audio-player
+# Without this, systemd deletes ALL of /run/audio-player on every stop — the
+# viz logs the VU meter reads, and btctl.lock / scan.active / pairing.active,
+# the sentinels bt_autoconnect.sh uses to keep the 45 s retry timer off the
+# radio during a user scan. Restarting mpv is now routine, so that wipe would
+# happen constantly.
+RuntimeDirectoryPreserve=yes
+
+[Install]
+WantedBy=multi-user.target

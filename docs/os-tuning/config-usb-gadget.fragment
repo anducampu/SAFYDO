@@ -1,0 +1,7 @@
+# USB dev link (serial console + SSH over the USB data port) — see docs/usb-dev-link.md
+# dr_mode=otg: device mode when tethered to a PC, host mode via OTG adapter
+# (dongles / USB sticks keep working). Takes effect after reboot.
+dtoverlay=dwc2,dr_mode=otg
+# Last-resort GPIO serial console on pins 8/10 (needs a USB-TTL adapter).
+# Mini-UART only — Bluetooth stays on the PL011 UART, unaffected.
+enable_uart=1

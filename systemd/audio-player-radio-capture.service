@@ -1,0 +1,16 @@
+[Unit]
+Description=DABBoard I2S capture into the FIFO mpv plays
+After=sound.target
+
+[Service]
+Type=simple
+RuntimeDirectory=audio-player
+RuntimeDirectoryPreserve=yes
+ExecStartPre=/bin/sh -c '[ -p /run/audio-player/radio.fifo ] || { rm -f /run/audio-player/radio.fifo; mkfifo -m 600 /run/audio-player/radio.fifo; }'
+# S16_LE is the only format the board delivers real audio in: S32_LE fails with
+# -EIO and S24_LE carries nothing above its low 8 bits. Raw, because a WAV header
+# on a pipe carries a size limit.
+ExecStart=/bin/sh -c 'exec arecord -q -D hw:CARD=dabboard,DEV=0 -f S16_LE -r 48000 -c 2 -t raw > /run/audio-player/radio.fifo'
+Restart=no
+# arecord exits 1 when stopped, which is how every session ends.
+SuccessExitStatus=1
